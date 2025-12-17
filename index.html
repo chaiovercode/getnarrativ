@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narrativ - AI Visual Storytelling</title>
+    <meta name="description" content="Transform any topic into beautiful, shareable image stories with AI-powered research and generation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #10b981;
+            --accent-hover: #059669;
+            --border: #2a2a2a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .download-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .platform-note {
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Setup Section */
+        .setup {
+            padding: 60px 0;
+        }
+
+        .setup-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .setup-steps {
+            list-style: none;
+            counter-reset: step;
+        }
+
+        .setup-steps li {
+            counter-increment: step;
+            padding: 16px 0;
+            padding-left: 48px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .setup-steps li:last-child {
+            border-bottom: none;
+        }
+
+        .setup-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .setup-steps li strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .setup-steps li span {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* API Keys Section */
+        .api-keys {
+            padding: 60px 0;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .api-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .api-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .api-card .badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .badge.required {
+            background: #dc262620;
+            color: #f87171;
+        }
+
+        .badge.optional {
+            background: #10b98120;
+            color: #10b981;
+        }
+
+        .api-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .api-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .api-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 60px 0 40px;
+            }
+
+            .logo {
+                font-size: 36px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .setup-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <h1 class="logo">Narrativ</h1>
+            <p class="tagline">Transform any topic into beautiful, shareable image stories with AI-powered research and generation.</p>
+
+            <a href="https://github.com/chaiovercode/narrativ/releases/latest/download/Narrativ_1.0.2_aarch64.dmg" class="download-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                </svg>
+                Download for Mac
+            </a>
+            <p class="platform-note">Requires macOS 12+ with Apple Silicon (M1/M2/M3)</p>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <h2 class="section-title">Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">AI Research</h3>
+                    <p class="feature-desc">Deep research on any topic with automatic fact extraction and smart slide generation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Image Generation</h3>
+                    <p class="feature-desc">Create stunning visuals with Gemini or Fal.ai. Multiple aspect ratios for stories, posts, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3 class="feature-title">Custom Styles</h3>
+                    <p class="feature-desc">Extract visual styles from any reference image. Save and reuse your favorite aesthetics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3 class="feature-title">Notes & Wiki Links</h3>
+                    <p class="feature-desc">Take notes with markdown support. Link directly to your research boards with [[wiki links]].</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3 class="feature-title">iCloud Sync</h3>
+                    <p class="feature-desc">Your vault syncs automatically via iCloud. Access your work across all your devices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Local & Private</h3>
+                    <p class="feature-desc">Your API keys stay on your device. No accounts, no tracking, no subscriptions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Setup -->
+        <section class="setup">
+            <h2 class="section-title">Getting Started</h2>
+            <div class="setup-card">
+                <ol class="setup-steps">
+                    <li>
+                        <strong>Download & Install</strong>
+                        <span>Open the DMG and drag Narrativ to your Applications folder</span>
+                    </li>
+                    <li>
+                        <strong>First Launch</strong>
+                        <span>Right-click the app → Open (required first time to bypass Gatekeeper)</span>
+                    </li>
+                    <li>
+                        <strong>Set Up Your Vault</strong>
+                        <span>Choose where to store your research. We recommend iCloud for sync.</span>
+                    </li>
+                    <li>
+                        <strong>Add API Keys</strong>
+                        <span>Go to Settings and enter your API keys (see below)</span>
+                    </li>
+                    <li>
+                        <strong>Start Creating</strong>
+                        <span>Enter a topic and click Narrativ to generate your first story!</span>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- API Keys -->
+        <section class="api-keys">
+            <h2 class="section-title">API Keys</h2>
+            <div class="api-grid">
+                <div class="api-card">
+                    <h3>Google AI <span class="badge required">Required</span></h3>
+                    <p>Powers research, planning, and Gemini image generation.</p>
+                    <a href="https://aistudio.google.com/apikey" target="_blank">Get your free API key →</a>
+                </div>
+                <div class="api-card">
+                    <h3>Tavily <span class="badge optional">Optional</span></h3>
+                    <p>Enhanced web search for deeper, more accurate research.</p>
+                    <a href="https://tavily.com" target="_blank">Get API key →</a>
+                </div>
+                <div class="api-card">
+                    <h3>Fal.ai <span class="badge optional">Optional</span></h3>
+                    <p>Fast image generation with Flux models (~$0.01/image).</p>
+                    <a href="https://fal.ai" target="_blank">Get API key →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Made by <a href="https://github.com/chaiovercode">chaiovercode</a></p>
+        </div>
+    </footer>
+</body>
+</html>
