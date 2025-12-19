@@ -5,7 +5,7 @@ cask "narrativ" do
   url "https://github.com/chaiovercode/getnarrativ/releases/download/v#{version}/Narrativ_#{version}_aarch64.dmg"
   name "Narrativ"
   desc "AI-powered visual storytelling app"
-  homepage "https://narrativ.chaiovercode.com"
+  homepage "https://chaiovercode.com/narrativ"
 
   depends_on arch: :arm64
   depends_on macos: ">= :monterey"
